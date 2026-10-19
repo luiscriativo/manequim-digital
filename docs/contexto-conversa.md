@@ -105,6 +105,21 @@ Parte = { on: bool, etapas: [ { t: 'Talhar', s: 'p'|'f'|'ok' } ],
 
 **Identidade visual do protótipo:** Bodoni Moda (títulos), Figtree (texto), IBM Plex Mono (números/datas); acento vinho/rosa; modo claro e escuro; detalhe de ofício: barra de progresso desenhada como fita métrica.
 
+## 5b. Ajustes posteriores no protótipo e decisões
+
+- **Nome do app:** Manequim Digital (marca "Manequim *digital*" no topo). Removido o aviso "PROTÓTIPO" do topo.
+- **Paleta:** testamos um azul sóbrio e depois um azul bebê "fofinho". O Luis não gostou e **voltamos à paleta rosé/vinho original**.
+- **Eventos (metas com data):** viraram parte do app.
+  - Aba "Eventos" com próximos e concluídos. Criar e editar nome, data e observação; excluir (os trabalhos não são apagados, só desligados).
+  - Um trabalho pode estar ligado a no máximo um evento: pelo campo "Evento" no trabalho ou no novo trabalho, ou por "Adicionar trabalhos" na tela do evento.
+  - O prazo do trabalho é diferente da data do evento. O app avisa quando o prazo cai depois do evento.
+  - A tela Hoje e o Painel mostram uma faixa por evento ativo. Eventos com data passada viram "Concluídos".
+  - Para o futuro: link só de leitura por evento, para a dona e os convidados.
+- **Armazenamento das fotos: Cloudflare R2, plano gratuito.** O Luis perguntou sobre usar o Google Drive dele (4 TB) e depois um canal do Telegram. Os dois foram descartados como armazenamento principal: precisam de um intermediário (Worker) para exibir as imagens, são frágeis (autorizações que expiram, uso fora do propósito do serviço) e expõem fotos de clientes. Espaço não é problema: ~1 GB/ano com fotos comprimidas, então o plano gratuito do R2 dura anos.
+- **Ideias discutidas, não decididas:**
+  - backup automático das fotos no Google Drive, em pastas por evento/vestido/parte, eventualmente com os originais em alta resolução;
+  - avisos automáticos num grupo do Telegram (bloqueios, trabalho pronto, contagem para o evento), para a dona saber sem abrir o app.
+
 ## 6. Pendências e próximos passos
 
 1. **Validar o protótipo com a esposa.** Perguntas:
