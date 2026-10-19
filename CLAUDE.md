@@ -13,7 +13,7 @@ O Luis (dono deste repositório) está construindo o app para a esposa. Ainda n�
 - **Desktop:** o próprio PWA instalado. Tauri só se um dia fizer falta.
 - **Modelo central:** um *trabalho* (vestido) é dividido em **partes do corpo** (véu, decote, mangas, corpete, cintura, saia, barra, cauda) mais **extras** livres (bordado, forro, armação, capa). Cada parte tem uma **checklist livre de etapas** (sugestão padrão: talhar, alinhavar, prova, costurar, acabamento). Partes podem ser ligadas e desligadas por vestido. Ajuste, confecção e festa usam o mesmo modelo.
 - **Bloqueio** é algo importante no sistema: motivo (falta material, aguardando cliente, aguardando decisão, outro), detalhe e data de início. Os bloqueios por falta de material geram a **lista de compras** da dona.
-- **Desfile** é só uma *coleção* (um agrupamento com data-alvo), não o centro do app. O app tem que continuar útil depois do desfile.
+- **Eventos** (desfile, feira, sessão de fotos) são metas com nome, data e observação, criados e editados na aba Eventos. Um trabalho pode estar ligado a no máximo um evento (campo opcional no trabalho, ou "Adicionar trabalhos" na tela do evento). O prazo do trabalho é separado da data do evento, e o app avisa quando o prazo cai depois do evento. Eventos com data passada viram "Concluídos" e somem da tela Hoje. O app tem que continuar útil sem nenhum evento ativo.
 - **Perfis agora:** ateliê (edita tudo), dona (conta Google, só leitura), convidados (link só de leitura de uma coleção). Vendedoras e fluxo de aprovação ficam para uma fase futura.
 
 ## Arquivos

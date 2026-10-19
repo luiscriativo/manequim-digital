@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>Ateliê de Noivas</title>
+<title>Manequim Digital</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -10,6 +10,7 @@
   --accent:#8C2F5A; --accent-ink:#FFFFFF; --accent-soft:#F3E3EB;
   --done:#3E8C69; --done-soft:#E2F1EA; --doing:#C4861A; --doing-soft:#FAEFD9;
   --block:#C0403A; --block-soft:#F8E0DE; --todo:#DCD3D9; --tape:#F6E7A8; --tick:rgba(42,31,43,.38);
+  --scrim:rgba(20,12,20,.45);
   --display:'Bodoni Moda','Didot','Bodoni 72',Georgia,serif;
   --body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
@@ -20,15 +21,18 @@
   --accent:#E27CA8; --accent-ink:#1E1420; --accent-soft:#3B2331;
   --done:#5BBE91; --done-soft:#1F3229; --doing:#E7AC46; --doing-soft:#3A2E17;
   --block:#EF6B61; --block-soft:#3D1F1D; --todo:#4A3F4D; --tape:#5A4E2A; --tick:rgba(242,234,240,.4);
+  --scrim:rgba(20,12,20,.45);
   color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#161118; --surface:#211A24; --ink:#F2EAF0; --muted:#A898A7; --line:#3A2F3D;
   --accent:#E27CA8; --accent-ink:#1E1420; --accent-soft:#3B2331;
   --done:#5BBE91; --done-soft:#1F3229; --doing:#E7AC46; --doing-soft:#3A2E17;
   --block:#EF6B61; --block-soft:#3D1F1D; --todo:#4A3F4D; --tape:#5A4E2A; --tick:rgba(242,234,240,.4);
+  --scrim:rgba(20,12,20,.45);
   color-scheme:dark}
 
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{background:var(--bg)}
 body{color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
@@ -40,7 +44,6 @@ h1,h2,h3{margin:0;text-wrap:balance}
 p{margin:0}
 
 .app{max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
-.proto{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;padding-top:10px;letter-spacing:.02em}
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
 .brand{font-family:var(--display);font-size:22px;font-weight:600;letter-spacing:.01em}
 .brand i{font-style:italic;font-weight:500;color:var(--accent)}
@@ -91,6 +94,7 @@ p{margin:0}
 .desfile .big{font-family:var(--display);font-size:46px;line-height:1;font-weight:500}
 .desfile .row{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
 .desfile .lbl{font-size:12px;opacity:.75}
+.desfile .big .u{font-size:18px;font-family:var(--body)}
 .desfile .tape{background:color-mix(in srgb,var(--tape) 80%,var(--ink))}
 
 /* bloqueios */
@@ -168,14 +172,17 @@ svg.croqui .z:focus-visible{outline:none;stroke:var(--accent);stroke-width:3}
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);
   padding:6px max(16px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .tabs-in{max-width:440px;margin:0 auto;display:flex;justify-content:space-around;align-items:center}
-.tab{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;font-weight:600;color:var(--muted);padding:6px 10px;border-radius:10px}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;font-weight:600;color:var(--muted);padding:6px 6px;border-radius:10px}
+.ev-field{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.ev-field select{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 10px;font-size:13px;font-weight:600;max-width:100%}
+.ev-link{color:var(--accent);font-weight:600;font-size:13px}
 .tab svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .tab[aria-current="page"]{color:var(--accent)}
 .tab.plus{background:var(--accent);color:var(--accent-ink);border-radius:999px;width:46px;height:46px;justify-content:center;padding:0}
 .tab.plus svg{width:24px;height:24px;stroke-width:2.2}
 
 /* bottom sheet */
-.sheet-wrap{position:fixed;inset:0;z-index:20;background:rgba(20,12,20,.45);display:flex;align-items:flex-end;justify-content:center}
+.sheet-wrap{position:fixed;inset:0;z-index:20;background:var(--scrim);display:flex;align-items:flex-end;justify-content:center}
 .sheet{background:var(--bg);width:100%;max-width:480px;max-height:88%;overflow:auto;border-radius:20px 20px 0 0;
   padding:8px max(18px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));
   display:flex;flex-direction:column;gap:16px;animation:up .22s ease-out}
@@ -224,9 +231,8 @@ svg.croqui .z:focus-visible{outline:none;stroke:var(--accent);stroke-width:3}
 </svg>
 
 <div class="app">
-  <p class="proto">PROTÓTIPO · dados de exemplo · tudo fica salvo só neste navegador</p>
   <header class="top">
-    <div class="brand">Ateliê <i>de noivas</i></div>
+    <div class="brand">Manequim <i>digital</i></div>
     <div class="seg" role="group" aria-label="Quem está usando">
       <button id="m-atelie" data-act="modo" data-v="atelie">Ateliê</button>
       <button id="m-dona" data-act="modo" data-v="dona">Visão da dona</button>
@@ -241,7 +247,12 @@ svg.croqui .z:focus-visible{outline:none;stroke:var(--accent);stroke-width:3}
 
 <script>
 const TODAY = new Date(2026, 9, 19);
-const DESFILE = { nome: 'Desfile 2026', data: '2026-12-12' };
+function seedEventos() {
+  return [
+    { id: 'desfile2026', nome: 'Desfile 2026', data: '2026-12-12', obs: 'Data de exemplo: confirmar com a loja' },
+    { id: 'feira2026', nome: 'Feira de noivas', data: '2026-09-27', obs: 'Estande com 4 vestidos do acervo' }
+  ];
+}
 const ETAPAS = ['Talhar', 'Alinhavar', 'Prova', 'Costurar', 'Acabamento'];
 const ZONAS = [
   { k: 'veu', n: 'Véu' }, { k: 'decote', n: 'Decote' }, { k: 'mangas', n: 'Mangas' },
@@ -263,7 +274,7 @@ const PATHS = [
 const ST_LABEL = { done: 'Pronto', doing: 'Em andamento', block: 'Bloqueado', todo: 'Não começou', na: 'Não se aplica' };
 const S_LABEL = { p: 'Pendente', f: 'Fazendo', ok: 'Feito' };
 const MOTIVOS = ['Falta material', 'Aguardando cliente', 'Aguardando decisão', 'Outro'];
-const KEY = 'atelie-proto-v1';
+const KEY = 'atelie-proto-v1', KEY_EV = 'atelie-proto-eventos-v1';
 
 /* ---------- dados de exemplo ---------- */
 function seed() {
@@ -277,7 +288,7 @@ function seed() {
     return t;
   };
   return [
-    mk({ id: 'look07', tipo: 'Confecção', nome: 'Look 07 · Sereia em renda', cliente: 'Peça do desfile', colecao: DESFILE.nome, prazo: '2026-12-01',
+    mk({ id: 'look07', tipo: 'Confecção', nome: 'Look 07 · Sereia em renda', cliente: 'Peça do desfile', evento: 'desfile2026', prazo: '2026-12-01',
       zonas: {
         veu: Z(E(['ok', 'ok', 'ok', 'ok', 'ok'])), decote: Z(E(['ok', 'ok', 'ok', 'f'])), corpete: Z(E(['ok', 'ok', 'ok', 'f'])),
         mangas: Z(E(['ok']), { motivo: 'Falta material', detalhe: 'Renda chantilly marfim, 2 m', desde: '2026-10-14' }),
@@ -286,14 +297,14 @@ function seed() {
       extras: [{ n: 'Bordado de pérolas', etapas: L([['Riscar desenho', 'ok'], ['Bordar frente', 'f'], ['Bordar costas', 'p']]) },
                { n: 'Forro', etapas: L([['Talhar', 'ok'], ['Costurar', 'ok']]) }],
       hist: [{ d: '2026-10-18', x: 'Cintura: acabamento começou' }, { d: '2026-10-16', x: 'Decote: prova aprovada' }, { d: '2026-10-14', x: 'Mangas bloqueadas: falta renda chantilly' }] }),
-    mk({ id: 'look03', tipo: 'Confecção', nome: 'Look 03 · Princesa em zibeline', cliente: 'Peça do desfile', colecao: DESFILE.nome, prazo: '2026-12-05',
+    mk({ id: 'look03', tipo: 'Confecção', nome: 'Look 03 · Princesa em zibeline', cliente: 'Peça do desfile', evento: 'desfile2026', prazo: '2026-12-05',
       zonas: {
         decote: Z(E(['ok', 'ok', 'ok', 'ok', 'ok'])), corpete: Z(E(['ok', 'ok', 'ok', 'ok', 'f'])), cintura: Z(E(['ok', 'ok', 'ok', 'ok', 'ok'])),
         saia: Z(E(['ok', 'ok', 'ok', 'f'])), barra: Z(E(['ok', 'f'])), cauda: Z(E(['ok', 'ok', 'f']))
       },
       extras: [{ n: 'Armação', etapas: L([['Montar armação', 'ok'], ['Prova com armação', 'p']]) }],
       hist: [{ d: '2026-10-17', x: 'Saia: começou a costura' }] }),
-    mk({ id: 'look11', tipo: 'Confecção', nome: 'Look 11 · Midi com capa', cliente: 'Peça do desfile', colecao: DESFILE.nome, prazo: '2026-12-08',
+    mk({ id: 'look11', tipo: 'Confecção', nome: 'Look 11 · Midi com capa', cliente: 'Peça do desfile', evento: 'desfile2026', prazo: '2026-12-08',
       zonas: {
         decote: Z(E(['f'])), corpete: Z(E(['f'])), mangas: Z(E([])), cintura: Z(E([])),
         saia: Z(E([]), { motivo: 'Aguardando decisão', detalhe: 'Dona escolher entre tule e organza', desde: '2026-10-16' }), barra: Z(E([]))
@@ -319,9 +330,12 @@ function seed() {
 
 /* ---------- estado ---------- */
 let S = { modo: 'atelie', view: 'hoje', cur: null, filtro: 'Todos', editPartes: false, sheet: null };
-let T = load() || seed();
-function load() { try { const v = JSON.parse(localStorage.getItem(KEY)); return Array.isArray(v) ? v : null; } catch (e) { return null; } }
-function save() { try { localStorage.setItem(KEY, JSON.stringify(T)); } catch (e) { /* sem armazenamento: segue só em memória */ } }
+let T = load(KEY) || seed();
+let EV = load(KEY_EV) || seedEventos();
+// dados salvos antes de existir a tela de eventos usavam "colecao"
+T.forEach(t => { if (!('evento' in t)) t.evento = t.colecao ? 'desfile2026' : null; delete t.colecao; });
+function load(k) { try { const v = JSON.parse(localStorage.getItem(k)); return Array.isArray(v) ? v : null; } catch (e) { return null; } }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(T)); localStorage.setItem(KEY_EV, JSON.stringify(EV)); } catch (e) { /* sem armazenamento: segue só em memória */ } }
 
 /* ---------- utilidades ---------- */
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -356,6 +370,11 @@ const tipoPill = t => `<span class="pill">${esc(t.tipo)}</span>`;
 function log(t, x) { t.hist.unshift({ d: isoToday(), x }); }
 function toast(msg) { const el = document.getElementById('toast'); el.textContent = msg; el.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => el.hidden = true, 1800); }
 const RO = () => S.modo === 'dona';
+const ddmmaa = s => pd(s).toLocaleDateString('pt-BR');
+const evById = id => EV.find(e => e.id === id);
+const evPassou = ev => days(TODAY, pd(ev.data)) < 0;
+const evAtivos = () => EV.filter(e => !evPassou(e)).sort((a, b) => a.data.localeCompare(b.data));
+const depoisDoEvento = t => { const ev = t.evento && evById(t.evento); return ev && t.prazo > ev.data; };
 
 /* ---------- croqui ---------- */
 function croqui(t, { mini = false, live = false, picks = null } = {}) {
@@ -384,17 +403,18 @@ function blkRow(t, p) {
     <span class="ico" aria-hidden="true"></span><b>${esc(t.nome.split(' · ')[0])} · ${esc(p.n)}</b><span class="d">${d} dia${d === 1 ? '' : 's'} parado</span>
     <span class="x">${esc(p.bloqueio.motivo)}: ${esc(p.bloqueio.detalhe)}</span></button>`;
 }
-function desfileStats() {
-  const looks = T.filter(t => t.colecao === DESFILE.nome);
+function evStats(ev) {
+  const looks = T.filter(t => t.evento === ev.id);
   const pct = looks.length ? Math.round(looks.reduce((a, t) => a + prog(t), 0) / looks.length) : 0;
-  return { looks, pct, faltam: days(TODAY, pd(DESFILE.data)), bl: looks.reduce((a, t) => a + blocks(t).length, 0) };
+  return { looks, pct, faltam: days(TODAY, pd(ev.data)), bl: looks.reduce((a, t) => a + blocks(t).length, 0) };
 }
-function desfileBand() {
-  const s = desfileStats();
-  return `<button class="desfile" data-act="ir" data-v="painel">
-    <div class="row"><div><div class="lbl">${DESFILE.nome} · ${ddmm(DESFILE.data)} (data de exemplo)</div><div class="big">${s.faltam} <span style="font-size:18px;font-family:var(--body)">dias</span></div></div>
-    <div style="text-align:right" class="lbl">${s.looks.length} looks<br>${s.bl} bloqueio${s.bl === 1 ? '' : 's'}</div></div>
-    ${tape(s.pct)}</button>`;
+function evBand(ev, link = true) {
+  const s = evStats(ev), n = s.looks.length;
+  const big = s.faltam === 0 ? 'Hoje' : s.faltam === 1 ? `1 <span class="u">dia</span>` : `${s.faltam} <span class="u">dias</span>`;
+  return `<${link ? `button data-act="abrir-evento" data-id="${ev.id}"` : 'div'} class="desfile">
+    <div class="row"><div><div class="lbl">${esc(ev.nome)} · ${ddmm(ev.data)}</div><div class="big">${big}</div></div>
+    <div style="text-align:right" class="lbl">${n} trabalho${n === 1 ? '' : 's'}<br>${s.bl} bloqueio${s.bl === 1 ? '' : 's'}</div></div>
+    ${tape(s.pct)}</${link ? 'button' : 'div'}>`;
 }
 
 /* ---------- telas ---------- */
@@ -404,18 +424,18 @@ function vHoje() {
   const semana = T.filter(t => days(TODAY, pd(t.prazo)) <= 10 && prog(t) < 100).sort((a, b) => a.prazo.localeCompare(b.prazo));
   const andamento = T.filter(t => !semana.includes(t) && prog(t) < 100).sort((a, b) => a.prazo.localeCompare(b.prazo));
   return `<div class="stack" style="gap:4px"><span class="eyebrow">${dt}</span><h1 class="h1">Bom dia. <em>${bl.length} coisa${bl.length === 1 ? '' : 's'}</em> travada${bl.length === 1 ? '' : 's'} hoje.</h1></div>
-  ${desfileBand()}
+  ${evAtivos().map(ev => evBand(ev)).join('')}
   ${bl.length ? `<section class="section"><h2 class="h2">Travado <span class="n">${bl.length}</span></h2>${bl.map(([t, p]) => blkRow(t, p)).join('')}</section>` : ''}
   <section class="section"><h2 class="h2">Prazos dos próximos dias <span class="n">${semana.length}</span></h2>${semana.map(card).join('') || '<p class="muted small">Nada vencendo nos próximos 10 dias.</p>'}</section>
   <section class="section"><h2 class="h2">Em andamento <span class="n">${andamento.length}</span></h2>${andamento.map(card).join('')}</section>
   <div class="foot"><button class="link" data-act="reset">Restaurar dados de exemplo</button></div>`;
 }
 function vTrabalhos() {
-  const fs = ['Todos', 'Ajuste', 'Confecção', 'Festa', DESFILE.nome, 'Bloqueados'];
-  const list = T.filter(t => S.filtro === 'Todos' || t.tipo === S.filtro || t.colecao === S.filtro || (S.filtro === 'Bloqueados' && blocks(t).length))
+  const fs = [['Todos', 'Todos'], ['Ajuste', 'Ajuste'], ['Confecção', 'Confecção'], ['Festa', 'Festa'], ...evAtivos().map(e => ['ev:' + e.id, e.nome]), ['Bloqueados', 'Bloqueados']];
+  const list = T.filter(t => S.filtro === 'Todos' || t.tipo === S.filtro || S.filtro === 'ev:' + t.evento || (S.filtro === 'Bloqueados' && blocks(t).length))
     .sort((a, b) => a.prazo.localeCompare(b.prazo));
   return `<div class="stack" style="gap:4px"><span class="eyebrow">${T.length} trabalhos</span><h1 class="h1">Trabalhos</h1></div>
-  <div class="chips" role="group" aria-label="Filtro">${fs.map(f => `<button class="chip" data-act="filtro" data-v="${f}" aria-pressed="${S.filtro === f}">${f}</button>`).join('')}</div>
+  <div class="chips" role="group" aria-label="Filtro">${fs.map(([v, l]) => `<button class="chip" data-act="filtro" data-v="${v}" aria-pressed="${S.filtro === v}">${esc(l)}</button>`).join('')}</div>
   <div class="stack">${list.map(card).join('') || '<p class="muted small">Nenhum trabalho neste filtro.</p>'}</div>`;
 }
 function vDetalhe() {
@@ -429,8 +449,9 @@ function vDetalhe() {
       <span class="cnt">${ed ? (p.on ? 'ligada' : 'desligada') : `${feitas}/${p.etapas.length}`}</span></button>`;
   }).join('');
   return `<div><button class="back" data-act="voltar">‹ Voltar</button></div>
-  <div class="stack" style="gap:6px"><span class="eyebrow">${esc(t.tipo)}${t.colecao ? ' · ' + esc(t.colecao) : ''}</span><h1 class="h1">${esc(t.nome)}</h1>
-    <div class="meta"><span>${esc(t.cliente)}</span>${prazoTxt(t.prazo)}</div></div>
+  <div class="stack" style="gap:6px"><span class="eyebrow">${esc(t.tipo)}</span><h1 class="h1">${esc(t.nome)}</h1>
+    <div class="meta"><span>${esc(t.cliente)}</span>${prazoTxt(t.prazo)}</div>
+    ${eventoField(t)}</div>
   ${tape(prog(t))}
   <div class="croqui-box">
     ${RO() ? '' : `<div class="tools"><button class="btn sm" data-act="edit-partes" aria-pressed="${ed}">${ed ? 'Concluir' : 'Partes'}</button></div>`}
@@ -444,15 +465,51 @@ function vDetalhe() {
     </div></section>
   ${t.hist.length ? `<section class="section"><h2 class="h2">Histórico</h2><div class="hist">${t.hist.slice(0, 6).map(h => `<div><span class="mono">${ddmm(h.d)}</span><span>${esc(h.x)}</span></div>`).join('')}</div></section>` : ''}`;
 }
+function eventoField(t) {
+  const ev = t.evento && evById(t.evento);
+  const aviso = depoisDoEvento(t) ? `<span class="pill block">Prazo depois do evento (${ddmm(ev.data)})</span>` : '';
+  if (RO()) return ev ? `<div class="ev-field"><span class="muted small">Evento</span><button class="ev-link" data-act="abrir-evento" data-id="${ev.id}">${esc(ev.nome)} · ${ddmm(ev.data)}</button>${aviso}</div>` : '';
+  const opts = [`<option value="">Nenhum</option>`, ...EV.filter(e => !evPassou(e) || e.id === t.evento).map(e => `<option value="${e.id}" ${e.id === t.evento ? 'selected' : ''}>${esc(e.nome)} · ${ddmm(e.data)}</option>`)].join('');
+  return `<div class="ev-field"><label class="muted small" for="tr-evento">Evento</label><select id="tr-evento">${opts}</select>
+    ${ev ? `<button class="ev-link" data-act="abrir-evento" data-id="${ev.id}">Ver evento ›</button>` : ''}${aviso}</div>`;
+}
+function vEventos() {
+  const ativos = evAtivos(), passados = EV.filter(evPassou).sort((a, b) => b.data.localeCompare(a.data));
+  const row = ev => { const s = evStats(ev), n = s.looks.length;
+    return `<button class="card" data-act="abrir-evento" data-id="${ev.id}">
+      <div class="card-row"><div class="stack" style="gap:2px;min-width:0"><h3>${esc(ev.nome)}</h3><span class="sub">${ddmmaa(ev.data)}${ev.obs ? ' · ' + esc(ev.obs) : ''}</span></div>
+      <span class="pill ${evPassou(ev) ? 'na' : ''}">${evPassou(ev) ? 'Concluído' : s.faltam === 0 ? 'Hoje' : `faltam ${s.faltam} d`}</span></div>
+      ${tape(s.pct)}<span class="sub small">${n} trabalho${n === 1 ? '' : 's'}${s.bl ? ` · <span style="color:var(--block)">${s.bl} bloqueio${s.bl === 1 ? '' : 's'}</span>` : ''}</span></button>`; };
+  return `<div class="card-row" style="align-items:flex-end"><div class="stack" style="gap:4px"><span class="eyebrow">Metas com data</span><h1 class="h1">Eventos</h1></div>
+    ${RO() ? '' : `<button class="btn pri sm" data-act="novo-evento">+ Novo evento</button>`}</div>
+  <p class="muted small">Desfiles, feiras, sessões de fotos. Ligue trabalhos a um evento para acompanhar quanto falta até a data.</p>
+  <section class="section"><h2 class="h2">Próximos <span class="n">${ativos.length}</span></h2>${ativos.map(row).join('') || '<p class="muted small">Nenhum evento marcado.</p>'}</section>
+  ${passados.length ? `<section class="section"><h2 class="h2">Concluídos <span class="n">${passados.length}</span></h2>${passados.map(row).join('')}</section>` : ''}`;
+}
+function vEvento() {
+  const ev = evById(S.ev); if (!ev) { S.view = 'eventos'; return vEventos(); }
+  const s = evStats(ev), passou = evPassou(ev);
+  const looks = s.looks.slice().sort((a, b) => a.prazo.localeCompare(b.prazo));
+  const atrasados = looks.filter(depoisDoEvento);
+  return `<div><button class="back" data-act="voltar-evento">‹ Voltar</button></div>
+  <div class="card-row" style="align-items:flex-start"><div class="stack" style="gap:6px;min-width:0"><span class="eyebrow">Evento${passou ? ' · concluído' : ''}</span><h1 class="h1">${esc(ev.nome)}</h1>
+    <div class="meta"><span class="mono">${ddmmaa(ev.data)}</span>${ev.obs ? `<span>${esc(ev.obs)}</span>` : ''}</div></div>
+    ${RO() ? '' : `<button class="btn sm" data-act="editar-evento">Editar</button>`}</div>
+  ${evBand(ev, false)}
+  ${atrasados.length ? `<p class="note" style="background:var(--block-soft);color:var(--ink)"><b style="color:var(--block)">${atrasados.length} trabalho${atrasados.length === 1 ? '' : 's'} com prazo depois do evento.</b> Ajuste o prazo ou tire do evento.</p>` : ''}
+  <section class="section"><div class="card-row" style="align-items:center"><h2 class="h2">Trabalhos <span class="n">${looks.length}</span></h2>
+    ${RO() ? '' : `<button class="btn sm" data-act="vincular">+ Adicionar trabalhos</button>`}</div>
+    ${looks.length ? `<div class="looks">${looks.map(t => `<button class="look ${blocks(t).length ? 'b' : ''}" data-act="abrir" data-id="${t.id}">${croqui(t, { mini: true })}<span class="nm">${esc(t.nome.split(' · ')[1] || t.nome)}</span><span class="pct">${prog(t)}%${blocks(t).length ? ' · <span style="color:var(--block)">travado</span>' : ''}</span></button>`).join('')}</div>`
+      : `<p class="muted small">Nenhum trabalho ligado ainda.${RO() ? '' : ' Toque em “Adicionar trabalhos”.'}</p>`}</section>
+  <p class="note">No app de verdade, este evento terá um link só de leitura para mandar à dona e aos convidados.</p>`;
+}
 function vPainel() {
-  const s = desfileStats();
   const bl = T.flatMap(t => blocks(t).map(p => [t, p]));
   const compras = bl.filter(([, p]) => p.bloqueio.motivo === 'Falta material');
   const ajustes = T.filter(t => t.tipo === 'Ajuste' && prog(t) < 100);
   return `<div class="stack" style="gap:4px"><span class="eyebrow">${RO() ? 'Somente leitura' : 'O que a dona vê'}</span><h1 class="h1">Andamento do <em>ateliê</em></h1></div>
-  ${desfileBand().replace('data-act="ir" data-v="painel"', '')}
-  <section class="section"><h2 class="h2">Looks do desfile <span class="n">${s.looks.length}</span></h2>
-    <div class="looks">${s.looks.map(t => `<button class="look ${blocks(t).length ? 'b' : ''}" data-act="abrir" data-id="${t.id}">${croqui(t, { mini: true })}<span class="nm">${esc(t.nome.split(' · ')[1] || t.nome)}</span><span class="pct">${prog(t)}%${blocks(t).length ? ' · <span style="color:var(--block)">travado</span>' : ''}</span></button>`).join('')}</div></section>
+  ${evAtivos().map(ev => { const s = evStats(ev); return `<section class="section">${evBand(ev)}
+    ${s.looks.length ? `<div class="looks">${s.looks.map(t => `<button class="look ${blocks(t).length ? 'b' : ''}" data-act="abrir" data-id="${t.id}">${croqui(t, { mini: true })}<span class="nm">${esc(t.nome.split(' · ')[1] || t.nome)}</span><span class="pct">${prog(t)}%${blocks(t).length ? ' · <span style="color:var(--block)">travado</span>' : ''}</span></button>`).join('')}</div>` : ''}</section>`; }).join('')}
   <div class="kpis">
     <div class="kpi"><b class="mono">${ajustes.length}</b><span>ajustes em aberto</span></div>
     <div class="kpi"><b class="mono">${T.filter(t => days(TODAY, pd(t.prazo)) <= 7 && prog(t) < 100).length}</b><span>entregas em 7 dias</span></div>
@@ -495,15 +552,40 @@ function shNovo() {
     <div class="field"><label for="nv-nome">Vestido</label><input id="nv-nome" placeholder="Ex.: Vestido Aurora · acervo #112" required></div>
     <div class="field"><label for="nv-cli">Cliente ou destino</label><input id="nv-cli" placeholder="Ex.: Mariana S. · casamento 01/11"></div>
     <div class="field"><label for="nv-prazo">Prazo de entrega</label><input id="nv-prazo" type="date" value="2026-10-30" required></div>
+    <div class="field"><label for="nv-evento">Evento (opcional)</label><select id="nv-evento"><option value="">Nenhum</option>${evAtivos().map(e => `<option value="${e.id}">${esc(e.nome)} · ${ddmm(e.data)}</option>`).join('')}</select></div>
     <div class="field"><label>Partes que vão ser trabalhadas</label>
       <div class="croqui-box">${croqui(null, { live: true, picks: nv.zonas })}<p class="hint">Toque nas partes do vestido.</p></div></div>
     <button class="btn pri">Criar trabalho</button>
   </form>`;
 }
+function shEvento() {
+  const ev = S.sheet.id ? evById(S.sheet.id) : null;
+  return `<div class="grip"></div>
+  <div class="sheet-head"><div><span class="eyebrow">${ev ? 'Editar evento' : 'Novo evento'}</span><h2>${ev ? esc(ev.nome) : 'Qual é a meta?'}</h2></div><button class="x-btn" data-act="fechar" aria-label="Fechar">×</button></div>
+  <form class="stack" data-form="evento" style="gap:14px">
+    <div class="field"><label for="ev-nome">Nome</label><input id="ev-nome" value="${ev ? esc(ev.nome) : ''}" placeholder="Ex.: Desfile 2026" required></div>
+    <div class="field"><label for="ev-data">Data do evento</label><input id="ev-data" type="date" value="${ev ? ev.data : '2026-12-12'}" required></div>
+    <div class="field"><label for="ev-obs">Observação (opcional)</label><input id="ev-obs" value="${ev ? esc(ev.obs || '') : ''}" placeholder="Ex.: local, horário, quantos looks"></div>
+    <button class="btn pri">${ev ? 'Salvar' : 'Criar evento'}</button>
+  </form>
+  ${ev ? `<button class="btn danger" data-act="excluir-evento">${S.sheet.confirmar ? 'Toque de novo para excluir' : 'Excluir evento'}</button>
+    <p class="hint">Excluir não apaga os trabalhos. Eles só deixam de estar ligados a este evento.</p>` : ''}`;
+}
+function shVincular() {
+  const ev = evById(S.ev);
+  const lista = T.slice().sort((a, b) => (b.evento === ev.id) - (a.evento === ev.id) || a.prazo.localeCompare(b.prazo));
+  return `<div class="grip"></div>
+  <div class="sheet-head"><div><span class="eyebrow">${esc(ev.nome)}</span><h2>Trabalhos do evento</h2></div><button class="x-btn" data-act="fechar" aria-label="Fechar">×</button></div>
+  <p class="hint" style="text-align:left">Toque para ligar ou desligar. Um trabalho pode estar em um evento por vez.</p>
+  <div class="steps">${lista.map(t => { const on = t.evento === ev.id, outro = !on && t.evento && evById(t.evento);
+    return `<button class="step ${on ? 'ok' : ''}" data-act="vinc-toggle" data-id="${t.id}"><span class="ck"></span><span class="t">${esc(t.nome)}<br>
+      <span class="s">${esc(t.tipo)} · prazo ${ddmm(t.prazo)}${outro ? ' · está em ' + esc(outro.nome) : ''}${on && t.prazo > ev.data ? ' · <span style="color:var(--block)">prazo depois do evento</span>' : ''}</span></span></button>`; }).join('')}</div>
+  <button class="btn pri" data-act="fechar">Pronto</button>`;
+}
 function renderSheet() {
   const wrap = document.getElementById('sheetWrap'), el = document.getElementById('sheet');
   if (!S.sheet) { wrap.hidden = true; el.innerHTML = ''; return; }
-  el.innerHTML = S.sheet.type === 'zona' ? shZona() : shNovo();
+  el.innerHTML = { zona: shZona, novo: shNovo, evento: shEvento, vincular: shVincular }[S.sheet.type]();
   wrap.hidden = false;
 }
 
@@ -511,18 +593,20 @@ function renderSheet() {
 const ICON = {
   hoje: '<svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/><circle cx="18" cy="16" r="3"/></svg>',
   trabalhos: '<svg viewBox="0 0 24 24"><path d="M9 3h6l-1 4 4 13H6l4-13z"/></svg>',
+  eventos: '<svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M12 13.2l1 2 2.2.3-1.6 1.5.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.5 2.2-.3z"/></svg>',
   painel: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="1.5"/><rect x="14" y="4" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="6" rx="1.5"/><rect x="14" y="14" width="7" height="6" rx="1.5"/></svg>',
   plus: '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>'
 };
+const VIEWS = { hoje: vHoje, trabalhos: vTrabalhos, detalhe: vDetalhe, painel: vPainel, eventos: vEventos, evento: vEvento };
 function render() {
   document.getElementById('m-atelie').setAttribute('aria-pressed', S.modo === 'atelie');
   document.getElementById('m-dona').setAttribute('aria-pressed', S.modo === 'dona');
   if (RO() && S.view === 'hoje') S.view = 'painel';
-  const v = { hoje: vHoje, trabalhos: vTrabalhos, detalhe: vDetalhe, painel: vPainel }[S.view]();
-  document.getElementById('view').innerHTML = v;
-  const tabs = RO() ? ['painel', 'trabalhos'] : ['hoje', 'trabalhos', 'plus', 'painel'];
-  const lbl = { hoje: 'Hoje', trabalhos: 'Trabalhos', painel: 'Painel' };
-  const cur = S.view === 'detalhe' ? S.from : S.view;
+  document.getElementById('view').innerHTML = VIEWS[S.view]();
+  const tabs = RO() ? ['painel', 'eventos', 'trabalhos'] : ['hoje', 'trabalhos', 'plus', 'eventos', 'painel'];
+  const lbl = { hoje: 'Hoje', trabalhos: 'Trabalhos', eventos: 'Eventos', painel: 'Painel' };
+  const tabOf = v => v === 'detalhe' ? tabOf(S.from) : v === 'evento' ? (S.evFrom || 'eventos') : v;
+  const cur = tabOf(S.view);
   document.getElementById('tabs').innerHTML = tabs.map(k => k === 'plus'
     ? `<button class="tab plus" data-act="novo" aria-label="Novo trabalho">${ICON.plus}</button>`
     : `<button class="tab" data-act="ir" data-v="${k}" ${cur === k ? 'aria-current="page"' : ''}>${ICON[k]}${lbl[k]}</button>`).join('');
@@ -544,6 +628,17 @@ document.addEventListener('click', e => {
     case 'ir': go(el.dataset.v); break;
     case 'filtro': S.filtro = el.dataset.v; render(); break;
     case 'abrir': S.from = S.view === 'detalhe' ? S.from : S.view; S.cur = el.dataset.id; go('detalhe'); break;
+    case 'abrir-evento': if (S.view !== 'evento') S.evFrom = S.view === 'detalhe' ? S.from : S.view; S.ev = el.dataset.id; go('evento'); break;
+    case 'voltar-evento': go(S.evFrom && S.evFrom !== 'evento' ? S.evFrom : 'eventos'); break;
+    case 'novo-evento': S.sheet = { type: 'evento' }; renderSheet(); break;
+    case 'editar-evento': S.sheet = { type: 'evento', id: S.ev }; renderSheet(); break;
+    case 'excluir-evento':
+      if (!S.sheet.confirmar) { S.sheet.confirmar = true; renderSheet(); break; }
+      T.forEach(x => { if (x.evento === S.sheet.id) x.evento = null; }); EV = EV.filter(x => x.id !== S.sheet.id);
+      save(); toast('Evento excluído'); go('eventos'); break;
+    case 'vincular': S.sheet = { type: 'vincular' }; renderSheet(); break;
+    case 'vinc-toggle': { const x = byId(el.dataset.id), ev = evById(S.ev); x.evento = x.evento === ev.id ? null : ev.id;
+      log(x, x.evento ? `Ligado ao evento ${ev.nome}` : `Tirado do evento ${ev.nome}`); save(); renderSheet(); break; }
     case 'abrir-zona': S.from = S.view; S.cur = el.dataset.id; go('detalhe'); S.sheet = { type: 'zona', k: el.dataset.k }; renderSheet(); break;
     case 'voltar': go(S.from || 'hoje'); break;
     case 'edit-partes': S.editPartes = !S.editPartes; render(); break;
@@ -565,9 +660,9 @@ document.addEventListener('click', e => {
     case 'novo-tipo': S.sheet.tipo = el.dataset.v; el.parentElement.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === el)); break;
     case 'novo-zona': { const k = el.dataset.k, z = S.sheet.zonas; z.has(k) ? z.delete(k) : z.add(k);
       document.querySelectorAll(`#sheet path[data-k="${k}"]`).forEach(p => { p.classList.toggle('pick', z.has(k)); p.classList.toggle('na', !z.has(k)); }); break; }
-    case 'reset': try { localStorage.removeItem(KEY); } catch (er) {} T = seed(); go('hoje'); toast('Dados de exemplo restaurados'); break;
+    case 'reset': try { localStorage.removeItem(KEY); localStorage.removeItem(KEY_EV); } catch (er) {} T = seed(); EV = seedEventos(); S.filtro = 'Todos'; go('hoje'); toast('Dados de exemplo restaurados'); break;
   }
-  if (S.view === 'detalhe' && a !== 'zona' && a !== 'abrir' && a !== 'abrir-zona' && S.sheet) document.getElementById('view').innerHTML = vDetalhe();
+  if ((S.view === 'detalhe' || S.view === 'evento') && S.sheet && !['zona', 'abrir', 'abrir-zona', 'abrir-evento'].includes(a)) document.getElementById('view').innerHTML = VIEWS[S.view]();
 });
 document.addEventListener('keydown', e => {
   if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('path[data-act]')) { e.preventDefault(); e.target.dispatchEvent(new MouseEvent('click', { bubbles: true })); }
@@ -588,16 +683,27 @@ document.addEventListener('submit', e => {
   if (f === 'bloqueio') { const v = document.getElementById('blk-det').value.trim(); if (!v) return;
     const p = getPart(t, S.sheet.k); p.bloqueio = { motivo: S.sheet.motivo, detalhe: v, desde: isoToday() };
     log(t, `${partName(t, S.sheet.k)} bloqueada: ${v}`); S.sheet.bloquear = false; save(); toast('Bloqueado. A dona vai ver no painel.'); render(); }
+  if (f === 'evento') {
+    const nome = document.getElementById('ev-nome').value.trim(), data = document.getElementById('ev-data').value, obs = document.getElementById('ev-obs').value.trim();
+    if (!nome || !data) return;
+    if (S.sheet.id) { Object.assign(evById(S.sheet.id), { nome, data, obs }); save(); toast('Evento salvo'); S.sheet = null; render(); }
+    else { const id = 'ev' + Date.now(); EV.push({ id, nome, data, obs }); save(); S.evFrom = S.view; S.ev = id; go('evento'); toast('Evento criado. Agora adicione os trabalhos.'); }
+    return;
+  }
   if (f === 'novo') {
     const nome = document.getElementById('nv-nome').value.trim(); if (!nome) return;
     if (!S.sheet.zonas.size) { toast('Toque em pelo menos uma parte do vestido'); return; }
     const tipo = S.sheet.tipo, id = 'n' + Date.now();
     const zonas = {}; ZONAS.forEach(z => zonas[z.k] = { on: S.sheet.zonas.has(z.k), etapas: S.sheet.zonas.has(z.k) ? (tipo === 'Ajuste' ? [{ t: 'Ajustar', s: 'p' }, { t: 'Prova', s: 'p' }] : ETAPAS.map(x => ({ t: x, s: 'p' }))) : [], bloqueio: null, fotos: [] });
-    T.push({ id, tipo, nome, cliente: document.getElementById('nv-cli').value.trim() || '—', prazo: document.getElementById('nv-prazo').value || '2026-10-30', zonas, extras: [], hist: [{ d: isoToday(), x: 'Trabalho criado' }] });
+    T.push({ id, tipo, nome, cliente: document.getElementById('nv-cli').value.trim() || '—', prazo: document.getElementById('nv-prazo').value || '2026-10-30', evento: document.getElementById('nv-evento').value || null, zonas, extras: [], hist: [{ d: isoToday(), x: 'Trabalho criado' }] });
     save(); S.from = 'trabalhos'; S.cur = id; go('detalhe'); toast('Trabalho criado');
   }
 });
 document.addEventListener('change', e => {
+  if (e.target.id === 'tr-evento') {
+    const t = byId(S.cur), ev = evById(e.target.value); t.evento = ev ? ev.id : null;
+    log(t, ev ? `Ligado ao evento ${ev.nome}` : 'Tirado do evento'); save(); render(); toast(ev ? `Ligado a ${ev.nome}` : 'Sem evento'); return;
+  }
   if (e.target.id !== 'foto-in' || !e.target.files[0]) return;
   const t = byId(S.cur), p = getPart(t, S.sheet.k), r = new FileReader();
   r.onload = () => { const img = new Image(); img.onload = () => {

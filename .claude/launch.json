@@ -1,0 +1,1 @@
+{"version":"0.0.1","configurations":[{"name":"manequim-prototipo","runtimeExecutable":"python3","runtimeArgs":["-m","http.server","8766","--directory","/Users/luismelo/Documents/manequim-digital"],"port":8766}]}
