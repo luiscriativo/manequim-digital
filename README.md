@@ -1,0 +1,1 @@
+# manequim-digital
